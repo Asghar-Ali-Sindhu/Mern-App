@@ -1,24 +1,33 @@
-import express from 'express'
-import colors from 'colors'
-import dotenv from 'dotenv'
-// reset object
-const app = express()
+import express from "express";
+import colors from "colors";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
+import morgan from "morgan";
 
 //configure dotenv
-dotenv.config()
+dotenv.config();
 
+// database config
+connectDB();
+// reset object
+const app = express();
+
+//middlewares
+app.use(morgan("dev"));
+app.use(express.json());
 //rest api
-app.get('/', (req, res)=>{
-res.send(
-    "<h1>Welcome to Ecommerce App</h1>"
-)
-})
+app.get("/", (req, res) => {
+  res.send("<h1>Welcome to Ecommerce App</h1>");
+  
+});
 
-// port 
-const PORT = process.env.PORT || 8000
+// port
+const PORT = process.env.PORT || 8000;
 
-
-// listen 
-app.listen(PORT, ()=>{
-    console.log(` Server is running on ${process.env.DEV_MODE} mode on port:${PORT} `.bgMagenta.white)
-})
+// listen
+app.listen(PORT, () => {
+  console.log(
+    ` Server is running on ${process.env.DEV_MODE} mode on port:${PORT} `
+      .bgMagenta.white
+  );
+});
