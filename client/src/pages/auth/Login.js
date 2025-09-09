@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout.js";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../../components/styles/AuthStyles.css";
 import { useAuth } from "../../context/Auth.js";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [auth, setAuth] = useAuth()
+  const [auth, setAuth] = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
   const handleForm = async (e) => {
     e.preventDefault();
     try {
@@ -24,9 +26,9 @@ const Login = () => {
           ...auth,
           user: res.data.user,
           token: res.data.token,
-        })
-        localStorage.setItem('auth', JSON.stringify(res.data))
-        navigate("/");
+        });
+        localStorage.setItem("auth", JSON.stringify(res.data));
+        navigate(location.state || "/");
       } else {
         toast.error(res.data.message);
       }
