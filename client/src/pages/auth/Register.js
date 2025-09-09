@@ -10,13 +10,14 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [answer, setAnswer] = useState("")
   const navigate = useNavigate();
   const handleForm = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
         '/api/v1/auth/register',
-        {name, email, password, phone, address}
+        {name, email, password, phone, address, answer}
       );
       if(res.data.success){
         toast.success(res.data.message)
@@ -26,7 +27,7 @@ const Register = () => {
       }
     } catch (error) {
       console.log(error)
-      toast.error('Something went wrong')
+      toast.error('Something went wrong in registration')
     }
   };
   return (
@@ -51,7 +52,7 @@ const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
-              id="exampleInputName"
+              id="exampleInputEmail"
               placeholder="Enter Your Email"
               required
             />
@@ -86,6 +87,17 @@ const Register = () => {
               className="form-control"
               id="exampleInputAddress"
               placeholder="Enter Your Address"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="form-control"
+              id="exampleInputAnswer"
+              placeholder="Best Friend Name?"
               required
             />
           </div>
