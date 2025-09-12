@@ -100,11 +100,10 @@ export const singleCategoryController = async (req, res) => {
 // delete category controller
 export const deleteCategoryController = async (req, res) => {
   try {
-    const {id} = req.params;
-    await categoryModel.findOneAndDelete({id});
+    await categoryModel.findByIdAndDelete(req.params.id);
     res.status(200).send({
       success: true,
-      message: "Category Deleted Successfully"
+      message: "Category Deleted Successfully",
     });
   } catch (error) {
     console.log(error);

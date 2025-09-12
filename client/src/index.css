@@ -99,3 +99,7 @@
   align-items: center;
   height: 70vh;
 }
+
+table caption {
+  caption-side: top !important;
+}
