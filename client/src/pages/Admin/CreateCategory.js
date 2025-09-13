@@ -73,9 +73,9 @@ const CreateCategory = () => {
       const { data } = await axios.delete(
         `/api/v1/category/delete-category/${id}`
       );
-      if (data.success) {
+      if (data?.success) {
         toast.success(`Category is deleted`);
-        setCategories(categories.filter((cat) => cat._id !== id));
+        setCategories(categories?.filter((cat) => cat._id !== id));
       }
     } catch (error) {
       toast.error("Something went wrong");
